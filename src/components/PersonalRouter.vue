@@ -1,0 +1,18 @@
+<template>
+  <router-link :to="route">{{ buttonText }}</router-link>
+</template>
+
+<script setup>
+defineProps({
+  route: String,
+  buttonText: String,
+});
+</script>
+
+<style>
+
+.buttonText{
+  font-size: 50px
+}
+
+</style>
