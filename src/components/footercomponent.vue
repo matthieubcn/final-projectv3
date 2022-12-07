@@ -7,7 +7,7 @@
     <ul>
         <li>About</li>
         <li>Home</li>
-        <li>Term and conditions</li>
+        <li> <router-link to="/terms">Terms and Conditions</router-link></li>
         <li>Job Application</li>
     </ul>
 

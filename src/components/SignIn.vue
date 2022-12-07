@@ -8,7 +8,7 @@
   <div>
 
   <div class="container">
-    <h3 class="header-title">Log In to : Task your Life !</h3>
+    <h3 class="header-title">Log In to : TaskForce</h3>
       
     <form @submit.prevent="signIn" class="form-sign-in">
         <div class="form-input">
@@ -35,13 +35,11 @@
           />
           </div>
 
-     <button class="button-signinout" type="submit">Sign In</button>
+     <button class="button-signin" type="submit">Sign In</button>
 
     </form>
     <p class="signin-account">Do not have an account ? <PersonalRouter :route="route" :buttonText="buttonText" class="sign-up-link"/></p>
-  </div>
-
-
+    </div>
 
   </div>
   <div class=" picture">

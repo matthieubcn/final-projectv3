@@ -10,8 +10,8 @@
     </div>
     <NewTask @getTasks ='getTasks' />
     <h1>Tasks:</h1>
-    <TaskItem @deleteTask ="deleteTask" class="task-container" v-for="task in tasks" :key="task.id" :task="task" />
-    <TaskItem @click="toogleTask" />
+    <TaskItem @getTasks ='getTasks' @deleteTask ="deleteTask" class="task-container" v-for="task in tasks" :key="task.id" :task="task" @toogleTask ='toogleTask' />
+    <!-- <TaskItem @toogleTask ="toogleTask" class="task-container" v-for="task in tasks" :key="task.id" :task="task" /> -->
 
 
   </div>
@@ -37,28 +37,33 @@ const tasks = ref([]);
 // Creamos una función que conecte a la store para conseguir las tareas de supabase
 const getTasks = async() => {
   tasks.value = await taskStore.fetchTasks();
+  console.log(tasks.value);
 
 };
-getTasks()
+getTasks();
 
 const deleteTask = async () => {
   tasks.value = await taskStore.fetchTasks()
-}
-deleteTask()
+};
 
+deleteTask()
 
 const toogleTask = async () => {
   tasks.value = await taskStore.fetchTasks()
-}
-toogleTask()
+  console.log(tasks.value)
+};
+toogleTask('completed')
+
 </script>
 
 <style>
 
 
+
+
 </style>
 
-<!-- 
+/*
 **Hints**
 1. ref() is used here!
 2. (NewTask, TaskItem, Footer, Nav) components are used here! 
@@ -91,4 +96,4 @@ the function mentioned on hint4.
 take in 2 constants. 1 constant will take in the param/argument newValue. 1 constant will be used to get the param/argument 
 oldValue id. These 2 constants will be sent to the backend via the useTaskStore which holds an editTask method. This function 
 needs to call the function mentioned on hint4.
--->
+-->*/

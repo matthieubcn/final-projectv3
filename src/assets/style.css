@@ -25,6 +25,7 @@
 
 .signin-account{
     font-size: 2rem;
+
 }
 
 /* h1 {
@@ -71,9 +72,18 @@ p .sign-up-link{
 
 }
 
-p .signin-account{
-    font-size: 1.4rem;
+.signin-account{
+    font-size: 1.4em;
     font-family: 'Roboto';
+    color: rgb(84, 105, 141);
+
+    
+}
+
+.sign-in{
+   color: rgb(84, 105, 141);
+   font-size: 1.2rem;
+    ;
 }
 
 p {
@@ -84,6 +94,8 @@ p {
         font-size: 1.6rem;
         font-style: italic;
         margin-left: 20px;
+        color: rgb(84, 105, 141);
+        font-family: "roboto"
 }
 
 .button  {
@@ -98,7 +110,7 @@ p {
 }
 
 
-.button-signinout {
+.button-signin , .button-signup{
     font-size: 1.4rem;
     padding: 10px 15px;
     display: block;
@@ -118,7 +130,7 @@ p {
 
 #background{
     width: 900px;
-    height: 800px;
+    height: 730px;
 }
 
 .picture{
@@ -133,14 +145,70 @@ p {
     align-items: center;
     align-content: center;
     height: auto;
+    background-color:#F4F6F9 ;
 }
 
 .container {
     width: 100%;
     background-color: white;
+    padding: 20px;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 0.25rem;
 }
 
+/* For mobile user */
 
+@media (max-width : 800px){
+    .picture{
+        display: none;
+    }
+}
+
+@media (max-width : 800px){
+    .container{
+        height: auto;
+    }
+    .button-signin{
+        width: 90%;
+    }
+    .header-title{
+        text-align: center;
+    }
+    }
+
+    
+@media (max-width : 800px){
+    .big-container{
+        height: 900px;
+    }
+    }
+
+@media (max-width : 500px){
+        .container{
+            width: 100%;
+        }
+        .big-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        }
+        }
+
+
+/*Extra styling for the sign out page */
+
+.header-subtitle{
+    text-align: center;
+    color: rgb(84, 105, 141);
+}
+
+/*Button for mobile user */
+
+@media (max-width :800px){
+.button-signup{
+    width: 90%;
+}
+}
     
 /* Home view */
 

@@ -1,9 +1,22 @@
 <template>
-<div class="container">
+<div class="task-container">
     <h3>{{task.title}}</h3>
     <h3>{{task.description}}</h3>
-    <button @click="deleteTask">Delete {{task.title}}</button>
-</div>
+
+    <div v-show ="editTask">
+
+    <input type="text" placeholder="Title" v-model="name">
+    <input type="text" placeholder="Description" v-model="description">
+    <button @click="updateTask">Save</button>
+
+
+    </div>
+    <button @click="deleteTask">Delete </button>
+    <button @click="toogleTask"> toogle {{task.is_complete}}</button>
+    <button @click ="editStatus" class='button'>Edit</button>
+    </div>
+
+
 </template>
 
 <script setup>
@@ -11,30 +24,55 @@ import { ref } from 'vue';
 import { useTaskStore } from '../stores/task';
 import { supabase } from '../supabase';
 
-const taskStore = useTaskStore();
 
+const name = ref(props.task.title);
+const description = ref(props.task.description);
+const taskStore = useTaskStore();
 const props = defineProps({
     task: Object,
 });
 
+console.log(props.task);
+
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
 
-const emit = defineEmits (['deleteTask','toogleTask'])
+const editStatus = () => {
+    editTask.value = !editTask.value
+}
+
+
+const editTask = ref(false);
+const updateTask = async () => {
+    editStatus ()
+    await taskStore.refreshTask(name.value, description.value, props.task.id);
+    emit("getTasks")
+};
+
+const emit = defineEmits(['deleteTask','toogleTask','refreshTask'])
+
 const deleteTask = async() => {
     await taskStore.deleteTask(props.task.id);
-    emit('deleteTask') 
+    emit('deleteTask');
 };
 
 const toogleTask = async () => {
     await taskStore.toogleTask(props.task.id)
-    this.task.iscompleted = !this.task.iscompleted
-    emit('toogleTask')
-    
+    emit('toogleTask');
 }
+const refreshTask = async () => {
+    await taskStore.toogleTask(props.task.id)
+ 
+}
+
+
 
 </script>
 
 <style>
+
+.task-container {
+    display: flex;
+}
 
 </style>
 

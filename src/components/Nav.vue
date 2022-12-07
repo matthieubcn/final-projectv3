@@ -18,7 +18,7 @@
     <div>
       <ul>
         <li class="log-out-welcome">
-          <p class="router-styling"> Welcome, user</p>
+          <p class="router-styling"> Welcome,{{getUser.email}}</p>
         </li>
         <li>
           <button @click="signOut" class="button">Log out</button>

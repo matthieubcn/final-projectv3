@@ -5,6 +5,7 @@ import Account from "../views/Account.vue"
 import SignIn from "../components/SignIn.vue";
 import SignUp from "../components/SignUp.vue";
 import footer from "../components/footercomponent.vue";
+import terms from "../views/Terms.vue"
 
 const routes = [
   {
@@ -16,7 +17,8 @@ const routes = [
     ],
   },
   { path: "/", component: Home },
-  { path: "/account", component: Account }
+  { path: "/account", component: Account },
+  { path: "/terms", component:terms }
 ];
 
 const router = createRouter({

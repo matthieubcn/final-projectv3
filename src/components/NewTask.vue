@@ -8,6 +8,7 @@
     </div>
     <div>
         <div class="input-field-task">
+            <label> Create a task to rock your life </label>
             <input type="text" placeholder="Add a Task Title - Listen to Kendrick Lamar" v-model="name">
         </div>
         <div class="input-field-task">
@@ -42,7 +43,7 @@ if(name.value.length === 0 || description.value.length === 0){
     // Primero comprobamos que ningún campo del input esté vacío y lanzamos el error con un timeout para informar al user.
 
     showErrorMessage.value = true;
-    errorMessage.value = 'The task title or description is empty';
+    errorMessage.value = 'Please create a task before clicking on the add button';
     setTimeout(() => {
     showErrorMessage.value = false;
     }, 5000);
@@ -68,13 +69,18 @@ if(name.value.length === 0 || description.value.length === 0){
 }
 
 .input-field-task{
-    width: 80%
+    width: 50%
 }
 
 .container-task{
     display: flex;
     align-items: center;
 
+}
+
+.error-text{
+    font-size: 1.2rem;
+    font-family: 'Roboto';
 }
 
 

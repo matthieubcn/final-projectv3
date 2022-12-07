@@ -2,12 +2,12 @@
 
   <div class="big-container">
 
-    <div>
+  <div>
   
   <div class="container">
     <div class="header">
       <div class="header-description">
-        <h3 class="header-title">Register to Post-it your life !!!</h3>
+        <h3 class="header-title">Register to TaskForce</h3>
         <p class="header-subtitle">Start organizing your tasks!</p>
       </div>
     </div>
@@ -48,7 +48,7 @@
           />
         </div>
 
-        <button class="button" type="submit">Sign Up</button>
+        <button class="button-signup" type="submit">Sign Up</button>
         <p class="sign-in">
           Already have an account? 
           <PersonalRouter
@@ -66,7 +66,7 @@
 
 
 
-    <div>
+    <div class=" picture">
     <img id="background" src ='https://images.pexels.com/photos/389818/pexels-photo-389818.jpeg'>
     </div>
 
@@ -119,4 +119,6 @@ const signUp = async () => {
 };
 </script>
 
-<style></style>
+<style> 
+</style>
+
