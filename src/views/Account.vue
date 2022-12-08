@@ -2,7 +2,7 @@
   <Nav />
   <h1>Name: {{username}}</h1>
   <img :src="avatar_url ? avatar_url : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'" alt="Profile picture" class="avatar-picture">
-
+<!-- 
   <form @submit.prevent="signIn" class="form-sign-in">
         <div class="form-input-account-firstName">
           <label class="input-field-label-account">FirstName</label>
@@ -42,7 +42,7 @@
 
            <div class="form-input-account-Country">
            <label class="input-field-label-account">Country</label>
-           <select name="country">
+           <select  name="country">
            <option value="">Country...</option>
             <option value="AF">Afghanistan</option>
             <option value="AL">Albania</option>
@@ -293,9 +293,8 @@
             <option value="ZW">Zimbabwe</option>
           </select>
 
-        </div>
+        </div> -->
 
-</form>
 
 </template>
 

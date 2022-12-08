@@ -1,20 +1,36 @@
 <template>
-<div class="task-container">
-    <h3>{{task.title}}</h3>
-    <h3>{{task.description}}</h3>
+
+ 
+<div class="whole-task-container">
+    
+    
+
+    <div class="task-container">
+    <h3 class="task-title-styling">Title: {{task.title}}</h3>
+    <h3 class="task-title-styling"> Description: {{task.description}}</h3>
+    <!-- <h3 class="task-title-styling"> Created: {{task.inserted_at}}</h3> -->
+    </div>
 
     <div v-show ="editTask">
-
-    <input type="text" placeholder="Title" v-model="name">
-    <input type="text" placeholder="Description" v-model="description">
-    <button @click="updateTask">Save</button>
-
-
+    <label class = input-field-text>Title:</label>
+    <input  class=" input-field-text" type="text" placeholder="Title" v-model="name">
+    <label class =input-field-text>Task Description</label>
+    <input  class=" input-field-text" type="text" placeholder="Description" v-model="description">
     </div>
-    <button @click="deleteTask">Delete </button>
-    <button @click="toogleTask"> toogle {{task.is_complete}}</button>
-    <button @click ="editStatus" class='button'>Edit</button>
+
+    <div class = "button-container">
+
+    <button class="button-task" @click ="editStatus">Edit</button>
+    <button :class="task.is_complete ?'button-task' : 'button-task-completed'" @click="toogleTask"> Task completed {{task.is_complete}}</button>
+    <button class="button-task" @click="deleteTask">Delete </button>
+
+    
     </div>
+    <button v-show="editTask" class="button-task-save" @click="updateTask">Save</button>
+
+ 
+
+</div>
 
 
 </template>
@@ -61,8 +77,9 @@ const toogleTask = async () => {
 }
 const refreshTask = async () => {
     await taskStore.toogleTask(props.task.id)
- 
-}
+
+};
+
 
 
 
@@ -70,9 +87,109 @@ const refreshTask = async () => {
 
 <style>
 
-.task-container {
-    display: flex;
+.task-title-styling{
+    font-family: 'Roboto';
+    font-size: 1.4rem;
+    color: #042D60;
+    margin-left: 20px;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 5px;
 }
+
+.task-container {
+    display:flex;
+    flex-direction: column;
+}
+
+.button-container{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.whole-task-container {
+    display:flex;
+    margin: 20px;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    width: 30%;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width:800px){
+    .whole-task-container {
+        width: 90%;
+    }
+
+}
+
+
+.input-field-text{
+    height: 30px;
+    margin-left: 10px;
+    border:0px;
+    width: 90%;
+    color: rgb(84, 105, 141);
+    font-size: 1.4rem;
+    margin-top:20px;
+    display:inline-block;
+    font-style: italic;
+}
+
+.button-task {
+    font-size: 1.1rem;
+    padding: 10px 10px;
+    margin: 10px;
+    background-color: #3CA1E0;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    color: white;
+}   
+
+@media (max-width:800px){
+    .button-task {
+        width: 90%;
+    }
+    .button-task-completed {
+        width: 90%;
+    }
+    .button-task-save {
+        width: 60% !important;
+    }
+}
+
+.button-task-completed {
+    font-size: 1.1rem;
+    padding: 10px 10px;
+    display: block;
+    margin: 10px;
+    background-color:green;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    color: white;
+}
+
+.title-text {
+    color:green;
+
+}
+
+.button-task-save{
+    font-size: 1.1rem;
+    padding: 10px 10px;
+    display: block;
+    margin: 10px;
+    background-color: #f18962;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    color: white;
+    width: 80%;
+}
+
+
+
 
 </style>
 

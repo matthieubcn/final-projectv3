@@ -1,23 +1,26 @@
 <template>
     <div class="container-task">
-    <h1 class='new-task-title'>Create a new task</h1>
-    <button @click="addTask" class="button">Add</button>
+    <h1 class='new-task-title'>Create a new task!</h1>
+    <button @click="addTask" class="button-addTask">Add</button>
+
     </div>
+
     <div v-if="showErrorMessage">
     <p class="error-text">{{ errorMessage }}</p>
     </div>
+
     <div>
         <div class="input-field-task">
-            <label> Create a task to rock your life </label>
-            <input type="text" placeholder="Add a Task Title - Listen to Kendrick Lamar" v-model="name">
+            <input  class = input-field-label-task type="text" placeholder="Add a Task Title " v-model="name">
         </div>
         <div class="input-field-task">
-            <input type="text" placeholder="Add a Task Description - Look up Kendrick Lamar's FEAR album on spotify and listen to the whole album." v-model="description">
+            <input  class = input-field-label-task-sub type="text" placeholder="Add a Task Description..." v-model="description">
         </div>
 
-        
-        
     </div>
+
+
+
 </template>
 
 <script setup>
@@ -57,6 +60,7 @@ if(name.value.length === 0 || description.value.length === 0){
 }
 };
 
+
 </script>
 
 <style>
@@ -66,10 +70,28 @@ if(name.value.length === 0 || description.value.length === 0){
 .new-task-title{
     font-size: 2rem;
     color:#3CA1E0;
+    margin:20px;
 }
 
-.input-field-task{
-    width: 50%
+.input-field-label-task {
+    width: 30%;
+    height: 30px;
+    margin-left: 20px;
+    border:0px;
+    color: rgb(84, 105, 141);
+    font-size: 1.4rem;
+}
+
+.input-field-label-task-sub{
+    width: 30%;
+    height: 90px;
+    margin-left: 20px;
+    border:0px;
+    color: rgb(84, 105, 141);
+    font-size: 1.4rem;
+    font-family: "roboto";
+    text-align: top;
+    
 }
 
 .container-task{
@@ -79,9 +101,34 @@ if(name.value.length === 0 || description.value.length === 0){
 }
 
 .error-text{
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-family: 'Roboto';
+    color: red;
+    padding: 10px;
 }
+
+.container-header{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    width: 30%;
+}
+
+.button-addTask{
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    display: block;
+    background-color:#3CA1E0;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    color: white;
+    margin: 20px;
+}
+
+
+
 
 
 

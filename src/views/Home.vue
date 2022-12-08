@@ -4,19 +4,24 @@
   <div class="wrapper">
     <Nav />
 
-    <div class="content"> 
+    <!-- <div class="content"> 
       <h3>Your account:</h3>
       <router-link to="/account">Account</router-link>
-    </div>
+    </div> -->
+    <div class=newtask-container>
     <NewTask @getTasks ='getTasks' />
-    <h1>Tasks:</h1>
+    </div>
+    <div class="tasks-list-container">
     <TaskItem @getTasks ='getTasks' @deleteTask ="deleteTask" class="task-container" v-for="task in tasks" :key="task.id" :task="task" @toogleTask ='toogleTask' />
     <!-- <TaskItem @toogleTask ="toogleTask" class="task-container" v-for="task in tasks" :key="task.id" :task="task" /> -->
+  </div>
+
 
 
   </div>
-
-  <footercomponent />
+  <div class="footer">
+    <footercomponent /> 
+  </div>
 </template>
 
 <script setup>
@@ -52,11 +57,39 @@ const toogleTask = async () => {
   tasks.value = await taskStore.fetchTasks()
   console.log(tasks.value)
 };
-toogleTask('completed')
+toogleTask('completed');
 
 </script>
 
 <style>
+
+.tasks-list-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.newtask-container{
+  display: flex;
+  flex-direction: column
+}
+
+@media (max-width:800px){
+
+  .tasks-list-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+
+}
+
 
 
 

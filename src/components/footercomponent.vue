@@ -14,9 +14,9 @@
     </div>
 
     <div class = "picture-container">
-        <img class="social-network" src ='https://www.facebook.com/images/fb_icon_325x325.png'>
-        <img class="social-network" src ="https://cdn-icons-png.flaticon.com/512/3621/3621435.png">
-        <img class="social-network" src ="https://www.maryville.edu/wp-content/uploads/2015/11/Linkedin-logo-1-550x550-300x300.png">
+        <img class="social-network" src ='https://cdn-icons-png.flaticon.com/512/25/25231.png'>
+        <img class="social-network" src ="https://www.pngfind.com/pngs/m/2-23339_black-and-white-instagram-logo-instagram-logo-2018.png">
+        <img class="social-network" src ="https://www.pngfind.com/pngs/m/2-23339_black-and-white-instagram-logo-instagram-logo-2018.png">
     </div>
 
 </div>
@@ -31,20 +31,13 @@
 .social-network {
     width:40px;
     height:40px;
-    padding: 20px;
-    text-align: center;
+    margin: 20px
 }
 
-.footer {
-    position: absolute;
-    bottom: 0px;
-    text-align: center;
-    margin-left: 40%;
-}
 
 .footer > div {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 li{

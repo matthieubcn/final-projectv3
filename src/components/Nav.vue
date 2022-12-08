@@ -1,11 +1,20 @@
 <template>
-  <nav>
     <!-- <PersonalRouter :route="route" :buttonText="buttonText" class="logo-link"/> -->
-    <router-link class="home router-styling" to="/">
-      Home
-    </router-link>
+    <div class = nav-container>
 
-    <ul>
+      <div>
+      <p class="router-styling"> Welcome,{{getUser.email}}</p>
+      </div>
+      <nav>
+   
+   
+     <ul>
+      <li>
+      <router-link class="router-styling" to="/">
+      Home
+     </router-link>
+      </li>
+
         <li>
           <router-link to="/" class="router-styling">Task Manager</router-link>
         </li>
@@ -13,19 +22,15 @@
         <li>
           <router-link to="/account" class="router-styling">Your Account</router-link>
         </li>
-    </ul>
 
-    <div>
-      <ul>
         <li class="log-out-welcome">
-          <p class="router-styling"> Welcome,{{getUser.email}}</p>
+        <button @click="signOut" class="button">Log out</button>
         </li>
-        <li>
-          <button @click="signOut" class="button">Log out</button>
-        </li>
-      </ul>
-    </div>
+
+    </ul>
+    
   </nav>
+</div>
 </template>
 
 <script setup>
@@ -35,6 +40,7 @@ import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { ref } from 'vue';
 import { supabase } from "../supabase";
+
 
 
 
@@ -65,20 +71,17 @@ const signOut = async () => {
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-.navbar-img {
-  width: 90px;
-  border-radius: 50%;
-}
 
-nav {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
+ 
+.nav-container{
+  display:flex;
   align-items: center;
-  font-size: 2rem;
+  justify-content: space-between;
+  background-color: #F4F6F9
 }
 
-nav ul {
+
+nav ul {  
   list-style: none;
   padding-inline-start: 20px;
   display: flex;
@@ -94,8 +97,15 @@ li{
 
 .router-styling{
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.4rem;
+  
 }
+
+
+
+
+
+
 
 
 
