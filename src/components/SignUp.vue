@@ -67,7 +67,7 @@
 
 
     <div class=" picture">
-    <img id="background" src ='https://images.pexels.com/photos/389818/pexels-photo-389818.jpeg'>
+      <SignUpRight  />  
     </div>
 
   </div>
@@ -81,6 +81,7 @@ import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
+import SignUpRight from "./SignUpRight.vue"
 
 // Route Variables
 const route = "/auth/login";

@@ -110,15 +110,30 @@ p {
 }
 
 
-.button-signin , .button-signup{
+.button-signin {
     font-size: 1.4rem;
-    padding: 10px 15px;
+    padding: 10px;
     display: block;
     margin: 20px;
     background-color: #3CA1E0;
     border: 1px solid rgb(216, 221, 230);
     border-radius: 4px;
     color: white;
+    width: 86%;
+
+}
+
+.button-signup{
+    font-size: 1.4rem;
+    padding: 10px 15px;
+    display: block;
+    margin: 20px;
+    background-color: #155FB2;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    color: white;
+    width: 87%;
+
 }
 
 .form > div{
@@ -130,7 +145,7 @@ p {
 
 #background{
     width: 900px;
-    height: 730px;
+    height: 690px;
 }
 
 .picture{

@@ -11,10 +11,10 @@
     <!-- <h3 class="task-title-styling"> Created: {{task.inserted_at}}</h3> -->
     </div>
 
-    <div v-show ="editTask">
-    <label class = input-field-text>Title:</label>
-    <input  class=" input-field-text" type="text" placeholder="Title" v-model="name">
-    <label class =input-field-text>Task Description</label>
+    <div class="input-field-text-container" v-show ="editTask">
+    <label class = input-field-text-label> Edit Title.....</label>
+    <input  class=" input-field-text" type="text" placeholder="Title...." v-model="name">
+    <label class =input-field-text-label> Edit Task Description...</label>
     <input  class=" input-field-text" type="text" placeholder="Description" v-model="description">
     </div>
 
@@ -105,6 +105,7 @@ const refreshTask = async () => {
 .button-container{
     display:flex;
     flex-wrap: wrap;
+    align-items: center
 }
 
 .whole-task-container {
@@ -115,7 +116,6 @@ const refreshTask = async () => {
     width: 30%;
     padding: 20px;
     align-items: center;
-    justify-content: center;
 }
 
 @media (max-width:800px){
@@ -125,39 +125,58 @@ const refreshTask = async () => {
 
 }
 
-
 .input-field-text{
-    height: 30px;
+    height: 50px;
     margin-left: 10px;
     border:0px;
     width: 90%;
     color: rgb(84, 105, 141);
     font-size: 1.4rem;
-    margin-top:20px;
+    margin-top:10px;
     display:inline-block;
-    font-style: italic;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.input-field-text-label{
+    color: rgb(84, 105, 141);
+    font-size: 1.5rem;
+    display: inline-block;
+    margin-left: 20px;
+
+
 }
 
 .button-task {
     font-size: 1.1rem;
-    padding: 10px 10px;
+    padding: 10px 15px;
     margin: 10px;
     background-color: #3CA1E0;
     border: 1px solid rgb(216, 221, 230);
     border-radius: 4px;
     color: white;
-}   
+    cursor:pointer;
+   
+}
+.button-container :nth-child(3){
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 @media (max-width:800px){
     .button-task {
-        width: 90%;
+        width: 100%;
     }
     .button-task-completed {
-        width: 90%;
+        width: 100%;
     }
     .button-task-save {
-        width: 60% !important;
+        width: 70% !important;
     }
+    .input-field-text{
+        width: 80%;
+
+}
 }
 
 .button-task-completed {
@@ -165,10 +184,11 @@ const refreshTask = async () => {
     padding: 10px 10px;
     display: block;
     margin: 10px;
-    background-color:green;
+    background-color:#f18962;
     border: 1px solid rgb(216, 221, 230);
     border-radius: 4px;
     color: white;
+    cursor: pointer;
 }
 
 .title-text {
@@ -181,11 +201,19 @@ const refreshTask = async () => {
     padding: 10px 10px;
     display: block;
     margin: 10px;
-    background-color: #f18962;
+    background-color: green;
     border: 1px solid rgb(216, 221, 230);
     border-radius: 4px;
     color: white;
     width: 80%;
+    cursor:pointer
+}
+
+
+@media (max-width: 800px) {
+    .button-task-save{
+    width: 65% !important;
+    }
 }
 
 

@@ -55,6 +55,8 @@ import {ref} from "vue"
 import PersonalRouter from "./PersonalRouter.vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
+import footercomponent from "../components/footercomponent.vue";
+
 
 // Route Variables
 const route = "/auth/signup";
@@ -78,5 +80,11 @@ const signIn = async () => {
 </script>
 
 <style>
+
+@media (max-width:800px){
+  .big-container{
+    height: 700px !important
+  }
+}
 
 </style>

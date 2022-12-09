@@ -3,7 +3,7 @@
     <div class = nav-container>
 
       <div>
-      <p class="router-styling"> Welcome,{{getUser.email}}</p>
+      <p class="router-styling"> Welcome </p>
       </div>
       <nav>
    
@@ -20,7 +20,7 @@
         </li>
 
         <li>
-          <router-link to="/account" class="router-styling">Your Account</router-link>
+          <router-link to="/account" class="router-styling">Your Account</router-link> 
         </li>
 
         <li class="log-out-welcome">
@@ -30,7 +30,8 @@
     </ul>
     
   </nav>
-</div>
+    </div>
+
 </template>
 
 <script setup>
@@ -66,6 +67,23 @@ const signOut = async () => {
   } catch (error) {}
 };
 
+
+// var sidenav = document.getElementById("mySidenav");
+// var openBtn = document.getElementById("openBtn");
+// var closeBtn = document.getElementById("closeBtn");
+
+// openBtn.onclick = openNav;
+// closeBtn.onclick = closeNav;
+
+/* Set the width of the side navigation to 250px */
+// function openNav() {
+//   sidenav.classList.add("active");
+// }
+
+// /* Set the width of the side navigation to 0 */
+// function closeNav() {
+//   sidenav.classList.remove("active");
+// }
 </script>
 
 <style>
@@ -100,13 +118,12 @@ li{
   font-size: 1.4rem;
   
 }
-
-
-
-
-
-
-
+@media (max-width : 500px){
+.nav-container{
+  display: flex;
+  flex-direction: column;
+}
+}
 
 
 </style>
