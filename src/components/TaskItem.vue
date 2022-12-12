@@ -1,51 +1,76 @@
 <template>
-
- 
-<div class="whole-task-container">
-    
-    
-
+  <div class="whole-task-container">
     <div class="task-container">
-    <h3 class="task-title-styling">Title: {{task.title}}</h3>
-    <h3 class="task-title-styling"> Description: {{task.description}}</h3>
-    <!-- <h3 class="task-title-styling"> Created: {{task.inserted_at}}</h3> -->
+      <h3
+        :class="
+          important ? 'task-title-styling' : 'task-title-styling-important'
+        "
+      >
+        Title: {{ task.title }}
+      </h3>
+      <h3
+        :class="
+          important ? 'task-title-styling' : 'task-title-styling-important'
+        "
+      >
+        Description: {{ task.description }}
+      </h3>
+      <!-- <h3 class="task-title-styling"> Created: {{task.inserted_at}}</h3> -->
     </div>
 
-    <div class="input-field-text-container" v-show ="editTask">
-    <label class = input-field-text-label> Edit Title.....</label>
-    <input  class=" input-field-text" type="text" placeholder="Title...." v-model="name">
-    <label class =input-field-text-label> Edit Task Description...</label>
-    <input  class=" input-field-text" type="text" placeholder="Description" v-model="description">
+    <div class="input-field-text-container" v-show="editTask">
+      <label class="input-field-text-label"> Edit Title.....</label>
+      <input
+        class="input-field-text"
+        type="text"
+        placeholder="Title...."
+        v-model="name"
+      />
+      <label class="input-field-text-label"> Edit Task Description...</label>
+      <input
+        class="input-field-text"
+        type="text"
+        placeholder="Description"
+        v-model="description"
+      />
     </div>
 
-    <div class = "button-container">
+    <div class="button-container">
+      <button class="button-task" @click="editStatus">Edit</button>
+      
+      <button class="button-task" @click="deleteTask">Delete</button>
 
-    <button class="button-task" @click ="editStatus">Edit</button>
-    <button :class="task.is_complete ?'button-task' : 'button-task-completed'" @click="toogleTask"> Task completed {{task.is_complete}}</button>
-    <button class="button-task" @click="deleteTask">Delete </button>
+      <button 
+        :class="task.is_complete ? 'button-task-completed' : 'button-task-uncompleted'"
+        @click="toogleTask" 
+        >
+        {{ task.is_complete ? "Task Completed " : " Task on-going" }}
+        
+      </button>
 
-    
+      <button
+        :class="important ? 'button-task' : 'button-task-important'"
+        @click="toogleImportant"
+      >
+        Important
+      </button>
     </div>
-    <button v-show="editTask" class="button-task-save" @click="updateTask">Save</button>
-
- 
-
-</div>
-
-
+    <button v-show="editTask" class="button-task-save" @click="updateTask">
+      Save
+    </button>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useTaskStore } from '../stores/task';
-import { supabase } from '../supabase';
-
+import { ref } from "vue";
+import { useTaskStore } from "../stores/task";
+import { supabase } from "../supabase";
 
 const name = ref(props.task.title);
 const description = ref(props.task.description);
 const taskStore = useTaskStore();
 const props = defineProps({
-    task: Object,
+  task: Object,
 });
 
 console.log(props.task);
@@ -53,172 +78,206 @@ console.log(props.task);
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
 
 const editStatus = () => {
-    editTask.value = !editTask.value
-}
-
+  editTask.value = !editTask.value;
+};
 
 const editTask = ref(false);
 const updateTask = async () => {
-    editStatus ()
-    await taskStore.refreshTask(name.value, description.value, props.task.id);
-    emit("getTasks")
+  editStatus();
+  await taskStore.refreshTask(name.value, description.value, props.task.id);
+  emit("getTasks");
 };
 
-const emit = defineEmits(['deleteTask','toogleTask','refreshTask'])
+const emit = defineEmits(["deleteTask", "toogleTask", "refreshTask"]);
 
-const deleteTask = async() => {
-    await taskStore.deleteTask(props.task.id);
-    emit('deleteTask');
+const deleteTask = async () => {
+  await taskStore.deleteTask(props.task.id);
+  emit("deleteTask");
 };
 
 const toogleTask = async () => {
-    await taskStore.toogleTask(props.task.id)
-    emit('toogleTask');
-}
+  await taskStore.toogleTask(props.task.id);
+  emit("toogleTask");
+};
 const refreshTask = async () => {
-    await taskStore.toogleTask(props.task.id)
-
+  await taskStore.toogleTask(props.task.id);
 };
 
+const important = ref(true);
+const toogleImportant = () => {
+  important.value = !important.value;
+  console.log(important.value);
+};
+
+// Created an alert
+
+const alertSucces = () => {
+        alert('Your rock {{username.value}} 1 task is done')
+};
+
+console.log(task.is_complete.value)
 
 
 
 </script>
 
 <style>
+.task-title-styling {
+  font-family: "Roboto";
+  font-size: 1.4rem;
+  color: #042d60;
+  margin-left: 20px;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 5px;
+}
 
-.task-title-styling{
-    font-family: 'Roboto';
-    font-size: 1.4rem;
-    color: #042D60;
-    margin-left: 20px;
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 5px;
+.task-title-styling-important {
+  font-family: "Roboto";
+  font-size: 1.4rem;
+  color: #042d60;
+  margin-left: 20px;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 5px;
+  color: red;
 }
 
 .task-container {
-    display:flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.button-container{
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .whole-task-container {
-    display:flex;
-    margin: 20px;
-    border: 1px solid rgb(216, 221, 230);
-    border-radius: 4px;
-    width: 30%;
-    padding: 20px;
-    align-items: center;
+  display: flex;
+  margin: 20px;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  width: 40%;
+  padding: 20px;
+  align-items: center;
 }
 
-@media (max-width:800px){
-    .whole-task-container {
-        width: 90%;
-    }
-
-}
-
-.input-field-text{
-    height: 50px;
-    margin-left: 10px;
-    border:0px;
+@media (max-width: 800px) {
+  .whole-task-container {
     width: 90%;
-    color: rgb(84, 105, 141);
-    font-size: 1.4rem;
-    margin-top:10px;
-    display:inline-block;
-    margin-left: 20px;
-    margin-right: 20px;
+  }
 }
 
-.input-field-text-label{
-    color: rgb(84, 105, 141);
-    font-size: 1.5rem;
-    display: inline-block;
-    margin-left: 20px;
+.input-field-text {
+  height: 50px;
+  margin-left: 10px;
+  border: 0px;
+  width: 90%;
+  color: rgb(84, 105, 141);
+  font-size: 1.4rem;
+  margin-top: 10px;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
-
+.input-field-text-label {
+  color: rgb(84, 105, 141);
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-left: 20px;
 }
 
 .button-task {
-    font-size: 1.1rem;
-    padding: 10px 15px;
-    margin: 10px;
-    background-color: #3CA1E0;
-    border: 1px solid rgb(216, 221, 230);
-    border-radius: 4px;
-    color: white;
-    cursor:pointer;
-   
+  font-size: 1.1rem;
+  padding: 10px 15px;
+  margin: 10px;
+  background-color: #3ca1e0;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
 }
-.button-container :nth-child(3){
-    margin-left: 10px;
-    margin-right: 10px;
+.button-container :nth-child(3) {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-@media (max-width:800px){
-    .button-task {
-        width: 100%;
-    }
-    .button-task-completed {
-        width: 100%;
-    }
-    .button-task-save {
-        width: 70% !important;
-    }
-    .input-field-text{
-        width: 80%;
-
-}
+@media (max-width: 800px) {
+  .button-task {
+    width: 100%;
+  }
+  .button-task-completed, .button-task-uncompleted {
+    width: 100%;
+  }
+  .button-task-save {
+    width: 70% !important;
+  }
+  .input-field-text {
+    width: 80%;
+  }
 }
 
 .button-task-completed {
-    font-size: 1.1rem;
-    padding: 10px 10px;
-    display: block;
-    margin: 10px;
-    background-color:#f18962;
-    border: 1px solid rgb(216, 221, 230);
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
+  font-size: 1.1rem;
+  padding: 10px 10px;
+  display: block;
+  margin: 10px;
+  background-color: green;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+
+.button-task-uncompleted {
+  font-size: 1.1rem;
+  padding: 10px 10px;
+  display: block;
+  margin: 10px;
+  background-color: purple;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+.button-task-important {
+  font-size: 1.1rem;
+  padding: 10px 10px;
+  display: block;
+  margin: 10px;
+  background-color: red;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
 }
 
 .title-text {
-    color:green;
-
+  color: green;
 }
 
-.button-task-save{
-    font-size: 1.1rem;
-    padding: 10px 10px;
-    display: block;
-    margin: 10px;
-    background-color: green;
-    border: 1px solid rgb(216, 221, 230);
-    border-radius: 4px;
-    color: white;
-    width: 80%;
-    cursor:pointer
+.button-task-save {
+  font-size: 1.1rem;
+  padding: 10px 10px;
+  display: block;
+  margin: 10px;
+  background-color: green;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  color: white;
+  width: 80%;
+  cursor: pointer;
 }
-
 
 @media (max-width: 800px) {
-    .button-task-save{
+  .button-task-save {
     width: 65% !important;
-    }
+  }
 }
-
-
-
-
 </style>
 
 <!--

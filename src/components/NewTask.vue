@@ -24,7 +24,7 @@
         placeholder="Add a Task Description..."
         v-model="description"
       />
-      <button @click="addTask" class="button-addTask">Add</button>
+      <button @click="addTask" class="button-addTask">Add it on your Deck</button>
     </div>
     
   </div>

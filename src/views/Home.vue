@@ -16,6 +16,8 @@
 
     <div class="newtask-container" v-if="addTaskShow">
       <NewTask @getTasks="getTasks" />
+      <NewTask @getTasks="getTasks" />
+
     </div>
     <div class="tasks-list-container">
       <TaskItem
@@ -32,6 +34,9 @@
   <div class="footer">
     <footercomponent v-if="addTaskShow" />
   </div>
+
+ 
+
 </template>
 
 <script setup>
@@ -42,6 +47,7 @@ import Nav from "../components/Nav.vue";
 import NewTask from "../components/NewTask.vue";
 import TaskItem from "../components/TaskItem.vue";
 import footercomponent from "../components/footercomponent.vue";
+
 
 const taskStore = useTaskStore();
 
@@ -54,6 +60,12 @@ const toggle = () => {
   addTaskShow.value = !addTaskShow.value;
   console.log(addTaskShow.value);
 };
+
+
+
+// Fonction to create one more task //
+
+// const addMoreTasks = ()
 
 const headTitle = "Create your own task"
 // Creamos una función que conecte a la store para conseguir las tareas de supabase
@@ -85,14 +97,17 @@ toogleTask("completed");
 
 }
 
+
+
 .newtask-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   animation-duration: 3s;
   animation-name: slidein;
   margin-left:2%
 }
+
 
 @keyframes slidein {
   from {
@@ -126,7 +141,11 @@ toogleTask("completed");
     flex-direction: column;
     flex-wrap: nowrap;
   }
+  .task-container-button{
+    margin-top: 90px;
+    margin-left: 0.5%;
 
+}
 }
 
 .footer {

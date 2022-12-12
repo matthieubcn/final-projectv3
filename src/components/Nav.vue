@@ -1,11 +1,11 @@
 <template>
     <!-- <PersonalRouter :route="route" :buttonText="buttonText" class="logo-link"/> -->
+
+   
     <div class = nav-container>
 
-      <div>
-      <p class="router-styling"> Welcome </p>
-      </div>
-      <nav>
+      <p class="username"> Welcome Ironhacker2020</p>
+      <!-- <nav class="navMenu">
    
    
      <ul>
@@ -23,14 +23,45 @@
           <router-link to="/account" class="router-styling">Your Account</router-link> 
         </li>
 
-        <li class="log-out-welcome">
+        <li id="log-out-welcome">
         <button @click="signOut" class="button">Log out</button>
         </li>
 
-    </ul>
+    </ul> -->
+
+
     
-  </nav>
+
+  <!-- <div>
+      <p class="router-styling"> Welcome IronHacker</p>
+      </div> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <section class="top-nav">
+   
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'></div>
+  </label>
+    <ul class="menu">
+      <router-link id="router-styling" to="/">
+      Home
+     </router-link>
+     
+      <router-link to="/" id="router-styling">Task Manager</router-link> 
+      <router-link to="/account" id="router-styling">Your Account</router-link>
+  
+    </ul>
+  </section>
+  <div id="log-out-welcome">
+  <button @click="signOut" class="button">Log out</button>
+  </div>
+
+
     </div>
+
+
+
 
 </template>
 
@@ -98,6 +129,12 @@ const signOut = async () => {
   background-color: #F4F6F9
 }
 
+.username{
+  font-size: 1.5rem;
+  font-weight: 300;
+
+}
+
 
 nav ul {  
   list-style: none;
@@ -108,22 +145,164 @@ nav ul {
   font-size:2rem;
 }
 
-li{
-  text-decoration: none;
-  padding-right: 20px;
+#router-styling{ 
+    text-decoration: none;
+    padding-right: 20px;
+    font-size: 1.5rem;
+    text-decoration:none;
+    text-align: center;
+    color: #444444;
 }
 
-.router-styling{
-  text-decoration: none;
-  font-size: 1.4rem;
-  
+#router-styling a hover{
+    color: green
 }
+
+#log-out-welcome :hover {
+  color: white !important;
+  background: linear-gradient(10deg,#3CA1E0,#155FB2);
+  cursor:pointer
+}
+
+
+/* 
 @media (max-width : 500px){
 .nav-container{
   display: flex;
   flex-direction: column;
 }
+} */
+
+
+
+.top-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F4F6F9;
+  background: linear-gradient(blue);
+  color: #FFF;
+  height: 50px;
+  padding: 1em;
 }
 
+.menu {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu > #router-styling {
+  margin: 0 1rem;
+  overflow: hidden;
+}
+
+.menu-button-container {
+  display: none;
+  height: 100%;
+  width: 30px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+  display: block;
+  background: linear-gradient(10deg,#3CA1E0,#155FB2);
+  position: absolute;
+  height: 4px;
+  width: 30px;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 2px;
+}
+
+.menu-button::before {
+  content: '';
+  margin-top: -8px;
+}
+
+.menu-button::after {
+  content: '';
+  margin-top: 8px;
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::before {
+  margin-top: 0px;
+  transform: rotate(405deg);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button {
+  background: rgba(255, 255, 255, 0);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::after {
+  margin-top: 0px;
+  transform: rotate(-405deg);
+}
+
+@media (max-width: 700px) {
+  .menu-button-container {
+    display: flex;
+  }
+
+  .username{
+    display:none
+  }
+  .menu {
+    position: fixed;
+    top: 0;
+    margin-top: 60px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  #menu-toggle ~ .menu #router-styling {
+    height: 0;
+    margin: 0;
+    padding: 0rem;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #menu-toggle:checked ~ .menu #router-styling {
+
+    height: 1rem;
+    padding: 2rem;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .menu > #router-styling {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color:#155FB2;
+    font-weight: 600;
+    background-color:#F4F6F9;
+
+    z-index:1;
+    text-decoration: none;
+  }
+
+}
+
+
+
+  /* .menu > li:not(:last-child) {
+    border-bottom: 1px solid #444;
+  }
+} */
 
 </style>

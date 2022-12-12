@@ -11,7 +11,7 @@ export const useUserStore = defineStore("user", {
       if(user) {
         this.user = user;
          const { data: profile } = await supabase
-        .from('profiles')
+        .from('abc')
         .select()
         .match({ user_id: this.user.id })
 
@@ -31,7 +31,7 @@ export const useUserStore = defineStore("user", {
         this.user = user;
         console.log(this.user);
 
-        const { data: profile } = await supabase.from('profiles').insert([
+        const { data: profile } = await supabase.from('abc').insert([
           {
             user_id: this.user.id,
             username: email
@@ -53,7 +53,7 @@ export const useUserStore = defineStore("user", {
       if (user) {
         this.user = user;
         const { data: profile } = await supabase
-        .from('profiles')
+        .from('abc')
         .select()
         .match({ user_id: this.user.id })
 

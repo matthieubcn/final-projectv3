@@ -15,7 +15,7 @@
 
     <div class = "picture-container">
         <img class="social-network" src ='https://cdn-icons-png.flaticon.com/512/25/25231.png'>
-        <img class="social-network" src ="https://www.pngfind.com/pngs/m/2-23339_black-and-white-instagram-logo-instagram-logo-2018.png">
+        <img class="social-network" src ="../assets/image/—Pngtree—linkedin icon_3584907.png">
         <img class="social-network" src ="https://www.pngfind.com/pngs/m/2-23339_black-and-white-instagram-logo-instagram-logo-2018.png">
     </div>
 
@@ -29,8 +29,8 @@
 
 <style>
 .social-network {
-    width:40px;
-    height:40px;
+    width:30px;
+    height:30px;
     margin: 20px
 }
 

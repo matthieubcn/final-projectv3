@@ -117,6 +117,7 @@ const signUp = async () => {
     return;
   }
   errorMsg.value = "the passwords are not matching";
+
 };
 </script>
 
