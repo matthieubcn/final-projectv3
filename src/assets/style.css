@@ -24,6 +24,7 @@
 
 html, body{
     background-color: (216, 221, 230); 
+   
 
 }
 
@@ -123,12 +124,12 @@ p {
     font-size: 1.4rem;
     padding: 10px;
     display: block;
-    margin: 20px;
+    margin: 15px;
     background-color: #3CA1E0;
     border: 1px solid rgb(216, 221, 230);
     border-radius: 4px;
     color: white;
-    width: 86%;
+    width: 93%;
 
 }
 
@@ -213,6 +214,7 @@ p {
 @media (max-width : 500px){
         .container{
             width: 100%;
+            padding: 20px
         }
         .big-container{
         display: flex;
@@ -221,7 +223,10 @@ p {
         }
 
         .new-task-title{
-            font-size: 15px !important
+            font-size: 14px !important
+        }
+        {
+            font-size: 2rem;
         }
     }
 /*Extra styling for the sign out page */
@@ -229,7 +234,9 @@ p {
 .header-subtitle{
     text-align: center;
     color: rgb(84, 105, 141);
+  
 }
+
 
 /*Button sign upfor mobile user */
 

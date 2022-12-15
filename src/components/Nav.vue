@@ -146,7 +146,7 @@ const signOut = async () => {
 .username{
   font-size: 1.6rem;
   font-weight: 800;
-  margin-left: 5%;
+  margin-left: 3.2%;
 
 
 }
@@ -219,10 +219,12 @@ nav ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position:fixed;
 }
 
 #menu-toggle {
   display: none;
+
 }
 
 .menu-button,

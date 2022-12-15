@@ -154,6 +154,16 @@ const alertSucces = () => {
   color: red;
 }
 
+@media (max-width:500px) {
+  .task-title-styling{
+  font-size:2rem;
+  margin-bottom: 10px;
+}
+.input-field-text-container{
+  margin-top: 20px;
+}
+}
+
 .task-container {
   display: flex;
   flex-direction: column;
@@ -223,14 +233,18 @@ const alertSucces = () => {
   .button-task-completed, .button-task-uncompleted {
     width: 100%;
   }
-  .button-task-save {
-    width: 70% !important;
-  }
+  
   .input-field-text {
     width: 80%;
   }
 }
 
+
+@media (max-width: 500px) {
+.button-task-save {
+    width: 96% !important;
+  }
+}
 .button-task-completed {
   font-size: 1.1rem;
   padding: 10px 10px;
@@ -285,14 +299,14 @@ const alertSucces = () => {
   border: 1px solid rgb(216, 221, 230);
   border-radius: 4px;
   color: white;
-  width: 80%;
+  width: 76%;
   cursor: pointer;
 }
 
 
 @media (max-width: 800px) {
   .button-task-save {
-    width: 65% !important; 
+    width: 65%; 
   }
   .flag-image{
    width: 10px !important;

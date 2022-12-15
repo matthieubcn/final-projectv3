@@ -87,6 +87,7 @@ const addTask = async () => {
   border: 0px;
   color: rgb(84, 105, 141);
   font-size: 1.4rem;
+  border-radius:1rem;
 }
 
 .input-field-label-task-sub {
@@ -98,6 +99,8 @@ const addTask = async () => {
   font-size: 1.4rem;
   font-family: "roboto";
   text-align: top;
+  border-radius:0.5rem;
+
 }
 
 .container-task {
@@ -107,8 +110,10 @@ const addTask = async () => {
 
 .container-new-task{
   border: 1px solid rgb(216, 221, 230);
-  background-color:#DED6CF;
+  background: rgb(159,164,196);
+  background: linear-gradient(10deg, rgba(159,164,196,1) 0%, rgba(179,205,209,1) 35%);
   width: 30%;
+  border-radius: 0.5rem;
 }
 
 @media (max-width : 800px){

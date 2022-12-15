@@ -30,7 +30,7 @@
 
     <div class = "picture-container">
         <img class="social-network" src ='https://cdn-icons-png.flaticon.com/512/25/25231.png'>
-        <img class="social-network" src ="https://www.pngfind.com/pngs/m/2-23339_black-and-white-instagram-logo-instagram-logo-2018.png">
+        <img class="social-network" src ="https://www.freepnglogos.com/uploads/twitter-logo-png/black-and-white-twitter-logo-png-hq-download-25.png">
         <img class="social-network" src ="https://www.pngfind.com/pngs/m/2-23339_black-and-white-instagram-logo-instagram-logo-2018.png">
     </div>
 
@@ -174,8 +174,8 @@ ul {
     /* text-align: center; */
 
 }
-h3{
-    font-size: 2.4rem;
+#head-title{
+    font-size: 2.4rem !important
 }
 }
 

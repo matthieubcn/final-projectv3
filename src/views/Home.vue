@@ -8,7 +8,7 @@
     </div> -->
     <div class="task-container-button">
       <button class="toogle-button" @click="toggle">TaskForce</button>
-      <h3 class="head-title">{{ headTitle }}</h3>
+      <h3 id="head-title">{{ headTitle }}</h3>
     </div>
 
     <div class="newtask-container" v-if="addTaskShow">
@@ -29,9 +29,9 @@
   </div>
 
 
-  <div class="footer">
-    <footercomponent id="footercomponent" v-if="addTaskShow" />
-  </div>
+  <div class="footer" v-if="addTaskShow">
+    <footercomponent id="footercomponent"  />
+  </div> 
 </template>
 
 <script setup>
@@ -159,7 +159,7 @@ toogleTask("completed");
   font-size: 1.4rem;
   padding: 10px 15px;
   display: block;
-  margin: 20px;
+  margin: 32px;
   background-color: green;
   border: 1px solid rgb(216, 221, 230);
   border-radius: 4px;

@@ -2,44 +2,64 @@
   <Nav />
   <div class="account-wrapper">
     <div class="left-account-page-wrapper">
+      <h1 class="account-title">Account Information</h1>
+
       <div class="account-image">
         <!-- <img :src="avatar_url ? avatar_url : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'" alt="Profile picture" class="avatar-picture"> -->
         <form class="form-widget" @submit.prevent="updateProfile">
           <Avatar v-model:path="avatar_url" @upload="updateProfile" size="20" />
         </form>
 
-        <div class="contact-info">
-          <h1 class="account-title">Account Information</h1>
-          <h1 class="account-name">Name :{{ username }}</h1>
-          <h1 class="account-email">Email : {{ email }}</h1>
+        <div class="contact-info" v-if="showProfileInfo">
+          <h1 class="account-name">User Name :{{ username }}</h1>
+          <h1 class="account-email">Full Name: {{ fullName }}</h1>
+          <h1 class="account-email">Web : {{ website }}</h1>
         </div>
       </div>
     </div>
 
+    <!-- <div class="achievements">
+      <achievements />
+    </div> -->
+
     <div class="right-account-page-wrapper">
-      <form @submit.prevent="submitForm" class="form-account">
+      <form
+        v-if="showEditProfileForm"
+        @submit.prevent="submitForm"
+        class="form-account"
+      >
+        <h3>Editing profile ....</h3>
+        <div id="user-input-surname-data">
+          <label class="account-label" for="fullName">Full Name </label>
+          <input
+            class="input-field"
+            name="fullName"
+            id="fullName"
+            type="text"
+            v-model.trim.lazy="formAccount.fullName"
+          />
+        </div>
         <div id="user-input-formName-data">
-          <label class="account-label" for="firstname">First Name</label>
+          <label class="account-label" for="userName">User Name</label>
           <input
             class="input-field"
             type="text"
             autocomplete="off"
-            id="firstname"
-            v-model.trim.lazy="formAccount.formName"
+            id="userName"
+            v-model.trim.lazy="formAccount.userName"
           />
         </div>
         <div id="user-input-surname-data">
-          <label class="account-label" for="surname">Surname </label>
+          <label class="account-label" for="website">Website</label>
           <input
             class="input-field"
-            name="surname"
-            id="surname"
+            name="website"
+            id="website"
             type="text"
-            v-model.trim.lazy="formAccount.formFamilyName"
+            v-model.trim.lazy="formAccount.website"
           />
         </div>
-
-        <div id="user-input-profileAge-data">
+        <!-- <div id="user-input-profileAge-data">
           <label class="account-label" for="profileAge"> Age </label>
           <input
             class="input-field"
@@ -92,10 +112,17 @@
               <option value="Africa">Africa</option>
             </select>
           </div>
-        </div>
+        </div> -->
 
         <input class="submit" type="submit" value="Send" />
+        <input
+          @click="toggleEditProfileForm"
+          class="submit"
+          type="button"
+          value="Cancel"
+        />
       </form>
+      <button v-else @click="toggleEditProfileForm">Edit Profile</button>
     </div>
   </div>
 
@@ -106,12 +133,12 @@
 
 <script setup>
 import { supabase } from "../supabase";
-import { onMounted, ref, toRefs, reactive } from "vue";
+import { onMounted, ref, toRefs, reactive, onUpdated } from "vue";
 import { useUserStore } from "../stores/user";
 import Nav from "../components/Nav.vue";
 import Avatar from "../components/avatar.vue";
 import footercomponent from "../components/footercomponent.vue";
-import { useProfileStore } from "../stores/profile";
+import achievements from "../components/achievements.vue";
 
 const userStore = useUserStore();
 
@@ -120,16 +147,23 @@ const username = ref(null);
 const website = ref(null);
 const avatar_url = ref(null);
 const email = ref(null);
+const fullName = ref(null);
 
 onMounted(() => {
   getProfile();
 });
 
+// onUpdated(() => {
+//   userStore.fetchUser();
+// });
+
 async function getProfile() {
   await userStore.fetchUser();
   username.value = userStore.profile.username;
   avatar_url.value = userStore.profile.avatar_url;
-  email.value = userStore.profile.email;
+  email.value = userStore.profile.user_email;
+  website.value = userStore.profile.website;
+  fullName.value = userStore.profile.full_name;
 }
 
 async function signOut() {
@@ -144,22 +178,57 @@ async function signOut() {
   }
 }
 
-const useProfile = useProfileStore()
+// ..
+// ..
+// ..
+// Logic for Editing profile data
 
 const formAccount = reactive({
-  formName: "",
-  formFamilyName: "",
-  formAdress: "",
-  formZipcode: null,
-  formProfileAge: null,
-  formLocation: [],
+  userName: "",
+  website: "",
+  fullName: "",
 });
-console.log(useProfileStore().fetchProfile());
 
+const submitForm = async () => {
+  if (formAccount.userName === "" || formAccount.website === "") {
+    alert("Hey Inputs must be filled... dont be lazy....");
+  } else {
+    // log info from from inputs
+    console.log(
+      "Form Account",
+      formAccount.userName,
+      formAccount.website,
+      formAccount.fullName
+    );
+    // send info to supabase
+    await userStore.refreshProfile(
+      formAccount.userName,
+      formAccount.website,
+      formAccount.fullName
+    );
+    // hides edit component
+    showEditProfileForm.value = !showEditProfileForm.value;
+    // shows profile information elements
+    showProfileInfo.value = !showProfileInfo.value;
+    // re-renders the information coming from supabase to sho updated profile info
+    getProfile();
+    // clear input fields
+    (formAccount.userName = ""),
+      (formAccount.website = ""),
+      (formAccount.fullName = "");
+    alert(
+      "Thank you very much - Merci - Your personnal Info has been updated !"
+    );
+    console.log("Form has been sent to supabase");
+  }
+};
 
-
-const submitForm = () => {
-  console.log("Form Account", formAccount);
+// variable to hold boolean show hide the form :)
+const showEditProfileForm = ref(false);
+const showProfileInfo = ref(true);
+const toggleEditProfileForm = () => {
+  showEditProfileForm.value = !showEditProfileForm.value;
+  showProfileInfo.value = !showProfileInfo.value;
 };
 </script>
 
@@ -232,6 +301,21 @@ const submitForm = () => {
   }
 }
 
+@media (max-width: 500px) {
+  .left-account-page-wrapper > div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-account-page-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .contact-info {
   margin-top: 20px;
 }
@@ -263,8 +347,6 @@ const submitForm = () => {
   height: 200px;
   background-color: whitesmoke;
 }
-
-
 
 @media (max-width: 800px) {
   #footercomponent {
@@ -352,5 +434,110 @@ input {
 }
 .address {
   display: flex;
+}
+.achievements {
+  margin-top: 20px;
+  display: flex;
+}
+@media (max-width: 500px) {
+  .form-account {
+    width: 80% !important;
+  }
+  .right-account-page-wrapper {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    background-color: #7f53ac;
+    margin-left: 2%;
+  }
+
+  .account-label {
+    font-size: 1.5em;
+    color: white;
+  }
+  #user-input-formName-data,
+  #user-input-surname-data,
+  #user-input-profileAge-data,
+  #user-input-Location-data,
+  .address {
+    padding-top: 10px;
+  }
+
+  .address {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .submit {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-account {
+    width: 80% !important;
+  }
+  .right-account-page-wrapper {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    background: rgb(95, 10, 135);
+    background: linear-gradient(
+      90deg,
+      rgba(95, 10, 135, 1) 0%,
+      rgba(164, 80, 139, 1) 35%
+    );
+    border-radius: 1rem;
+
+    margin-left: 2%;
+  }
+
+  .account-label {
+    font-size: 1.5em;
+    color: white;
+  }
+  #user-input-formName-data,
+  #user-input-surname-data,
+  #user-input-profileAge-data,
+  #user-input-Location-data,
+  .address {
+    padding-top: 10px;
+  }
+
+  .address {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .submit {
+    margin-bottom: 20px;
+  }
+
+  .left-account-page-wrapper > div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-account-page-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-info {
+    margin-top: 20px;
+  }
+
+  .right-account-page-wrapper > div {
+    display: flex;
+    background-color: #7f53ac;
+  }
+
+  .account-wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 </style>

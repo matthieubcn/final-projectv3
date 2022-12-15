@@ -11,9 +11,9 @@ export const useUserStore = defineStore("user", {
       if(user) {
         this.user = user;
          const { data: profile } = await supabase
-        .from('abc')
+        .from('profiles')
         .select()
-        .match({ user_id: this.user.id })
+        .match({ id : this.user.id })
 
         if (profile) this.profile = profile[0];
         console.log('user in store: ', this.user);
@@ -66,6 +66,19 @@ export const useUserStore = defineStore("user", {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
     },
+
+    // Function to connect to supabase to edit/UPDATE/PUT/PATCH[htttp codes] profile information to the database.
+    async refreshProfile(username, website, fullName) {
+      const { data, error } = await supabase.from('profiles').update([
+          {
+              username: username,
+              website: website,
+              full_name: fullName
+          }
+      ]).match({
+          id: this.user.id,
+      });
+  }
   },
 
   persist: {

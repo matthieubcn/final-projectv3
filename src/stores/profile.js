@@ -17,7 +17,7 @@ export const useProfileStore = defineStore("profile", {
             return this.profile;
         },
 
-        async addProfile(formName, formFamilyName, formProfileAge, formAdress,formZipcode, formLocation) {
+        async addProfile(formName, formFamilyName, formAdress, formLocation) {
             const { data, error } = await supabase.from('formAccount').insert([
                 {
                     formName: formName,
@@ -28,13 +28,26 @@ export const useProfileStore = defineStore("profile", {
                     formLocation: formLocation,
                 },
             ])
-        },
-            
+        },  
+
+        async deleteProfile(user_id){
+            const { data, error } = await supabase.from("formAccount").delete().match({
+              user_id: user_id,
+            });
       
-
-
-
-
+        },
+        // Function to edit profile data [full-name, website, username...]
+        // async refreshProfile(username, website, fullName, id) {
+        //     const { data, error } = await supabase.from('profiles').update([
+        //         {
+        //             username: username,
+        //             website: website,
+        //             full_name: fullName
+        //         }
+        //     ]).match({
+        //         id: id,
+        //     });
+        // }
     }
 
    
