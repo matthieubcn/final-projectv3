@@ -12,7 +12,7 @@
 
    <nav class = menu-list-free-trial-container >
         <ul class='menu-list-free-trial'>
-        <li class="list-free-trial"><img  class='green-tick' src="https://cdn.pixabay.com/photo/2013/07/13/10/48/check-157822_960_720.png">Sign in for Free no Credit Card required</li>
+        <li class="list-free-trial"><img  class='green-tick' src="https://cdn.pixabay.com/photo/2013/07/13/10/48/check-157822_960_720.png">Sign in for Free and choose your credit card later</li>
         <li class="list-free-trial"><img  class='green-tick' src="https://cdn.pixabay.com/photo/2013/07/13/10/48/check-157822_960_720.png">Preconfigured your account </li>
         <li class="list-free-trial"><img  class='green-tick' src="https://cdn.pixabay.com/photo/2013/07/13/10/48/check-157822_960_720.png">Created edited or deleted your own tasks </li>
         <li class="list-free-trial"><img  class='green-tick' src="https://cdn.pixabay.com/photo/2013/07/13/10/48/check-157822_960_720.png">IronHack is awesome </li>
@@ -57,7 +57,7 @@ import { ref } from "vue";
 
 // Header Freee Trial //
 
-const freeTrial = "Start your free trial. No credit card required, no software to install."
+const freeTrial = "Start your free trial. No Credit Credit card required now, no software to install."
 
 // SubHeader Freee Trial //
 

@@ -88,6 +88,7 @@ const addTask = async () => {
   color: rgb(84, 105, 141);
   font-size: 1.4rem;
   border-radius:1rem;
+  padding-left: 10px
 }
 
 .input-field-label-task-sub {
@@ -100,6 +101,8 @@ const addTask = async () => {
   font-family: "roboto";
   text-align: top;
   border-radius:0.5rem;
+  padding-left: 10px
+
 
 }
 

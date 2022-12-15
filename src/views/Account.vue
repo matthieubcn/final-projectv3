@@ -2,33 +2,40 @@
   <Nav />
   <div class="account-wrapper">
     <div class="left-account-page-wrapper">
-      <h1 class="account-title">Account Information</h1>
+      <h1 id="account-title">Account Information</h1>
 
       <div class="account-image">
         <!-- <img :src="avatar_url ? avatar_url : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'" alt="Profile picture" class="avatar-picture"> -->
+     
+     
         <form class="form-widget" @submit.prevent="updateProfile">
           <Avatar v-model:path="avatar_url" @upload="updateProfile" size="20" />
         </form>
 
+
+
         <div class="contact-info" v-if="showProfileInfo">
-          <h1 class="account-name">User Name :{{ username }}</h1>
-          <h1 class="account-email">Full Name: {{ fullName }}</h1>
+          <h1 class="account-name">User Name : {{ username }}</h1>
+          <h1 class="account-email">Full Name : {{ fullName }}</h1>
           <h1 class="account-email">Web : {{ website }}</h1>
+          
         </div>
+      
+ 
+       
       </div>
     </div>
 
-    <!-- <div class="achievements">
-      <achievements />
-    </div> -->
+    
 
+ 
     <div class="right-account-page-wrapper">
       <form
         v-if="showEditProfileForm"
         @submit.prevent="submitForm"
         class="form-account"
       >
-        <h3>Editing profile ....</h3>
+        <h3 id="edit-account">Editing profile ....</h3>
         <div id="user-input-surname-data">
           <label class="account-label" for="fullName">Full Name </label>
           <input
@@ -121,10 +128,34 @@
           type="button"
           value="Cancel"
         />
+        
       </form>
-      <button v-else @click="toggleEditProfileForm">Edit Profile</button>
+      <button  id='button-edit' v-else @click="toggleEditProfileForm">
+       Edit your profile here</button>
+      
+  
+    
     </div>
+
+    <div class="achievements">
+      <achievements />
+    </div>
+
+    <!-- <div class=" chart">
+    <h2 class=chart-font> Weekly - Number of created Tasks </h2>
+<column-chart 
+:data="[['Monday', 4], 
+['Tuesday', 3],
+ ['Wednesday', 6],
+ ['Thursday',10],
+['Friday', 1]]"
+:colors="['#39811D','#39811D','#3CA1E0','#3CA1E0']">
+</column-chart>
+</div> -->
+
   </div>
+
+
 
   <div class="footer">
     <footercomponent id="footercomponent" />
@@ -139,6 +170,8 @@ import Nav from "../components/Nav.vue";
 import Avatar from "../components/avatar.vue";
 import footercomponent from "../components/footercomponent.vue";
 import achievements from "../components/achievements.vue";
+import charts from "../components/charts.vue"
+
 
 const userStore = useUserStore();
 
@@ -217,7 +250,7 @@ const submitForm = async () => {
       (formAccount.website = ""),
       (formAccount.fullName = "");
     alert(
-      "Thank you very much - Merci - Your personnal Info has been updated !"
+      "Thank you very much - Merci - Your personnal info has been updated !"
     );
     console.log("Form has been sent to supabase");
   }
@@ -241,6 +274,11 @@ const toggleEditProfileForm = () => {
 .account-name,
 .account-email {
   font-size: 1.5rem;
+  font-weight: 300;
+  color: green;
+  padding-left: 2px;
+  
+
 }
 
 .account-name {
@@ -256,10 +294,125 @@ const toggleEditProfileForm = () => {
 }
 
 .left-account-page-wrapper {
-  margin-top: 2%;
+  margin-top: 3.4%;
 }
 
+#account-title {
+  font-size: 2rem;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  font-weight: 500;
+}
+
+#edit-account{
+  font-size: 2.4rem;
+  color: green;
+}
+
+
+
+#user-input-formName-data, #user-input-surname-data  {
+    margin-top: 10px;
+  }
+
+@media (max-width: 800px) {
+
+  .right-account-page-wrapper {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    background: rgb(95, 10, 135);
+    background: linear-gradient(
+      90deg,
+      rgba(95, 10, 135, 1) 0%,
+      rgba(164, 80, 139, 1) 35%
+    );
+    border-radius: 1rem;
+
+    margin-left: 2%;
+  }
+
+  .account-label {
+    font-size: 1.5em;
+    color: white  !important;
+
+  }
+
+  #user-input-formName-data,
+  #user-input-surname-data,
+  #user-input-profileAge-data,
+  #user-input-Location-data,
+  .address {
+    padding-top: 10px;
+   
+  }
+  #edit-account {
+  font-size: 2.4rem;
+  margin-top: 50px;
+  color:white;
+ 
+  }
+}
+
+
+
 @media (max-width: 500px) {
+  .left-account-page-wrapper {
+    margin-top: 10% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .account-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #edit-account {
+  font-size: 2.4rem;
+  margin-top: 50px;
+  color:white;
+ 
+  }
+  .form-account {
+    width: 90%;
+  }
+  .left-account-page-wrapper > div {
+    display: flex;
+  }
+}
+
+@media (max-width: 900px) {
+  .left-account-page-wrapper > div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-account-page-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.contact-info {
+  margin-top: 20px;
+}
+
+.right-account-page-wrapper > div {
+  display: flex;
+}
+
+.account-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+@media (max-width: 800px) {
   .left-account-page-wrapper {
     margin-top: 10% !important;
     display: flex;
@@ -278,26 +431,11 @@ const toggleEditProfileForm = () => {
   .left-account-page-wrapper > div {
     display: flex;
   }
-}
 
-@media (max-width: 800px) {
-  .left-account-page-wrapper {
-    margin-top: 22% !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  .account-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-account {
-    width: 90%;
-  }
-  .left-account-page-wrapper > div {
-    display: flex;
+  .account-label {
+    font-size: 1.5em;
+    color: white;
+    
   }
 }
 
@@ -326,8 +464,9 @@ const toggleEditProfileForm = () => {
 
 .account-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
+
 
 /* Footer style */
 
@@ -395,7 +534,6 @@ const toggleEditProfileForm = () => {
   font-size: 1.1rem;
   padding: 10px 10px;
   display: block;
-  margin: 10px;
   background-color: purple;
   border: 1px solid rgb(216, 221, 230);
   border-radius: 4px;
@@ -419,7 +557,6 @@ input {
   border: 1px solid rgb(216, 221, 230);
   border-radius: 4px;
   padding: 10px;
-  margin: 5px;
 }
 .input-field-label {
   color: rgb(84, 105, 141);
@@ -427,14 +564,6 @@ input {
   margin: 10px;
 }
 
-.input-field-zip {
-  font-size: 1.4rem;
-  border: 1px solid rgb(216, 221, 230);
-  border-radius: 4px;
-}
-.address {
-  display: flex;
-}
 .achievements {
   margin-top: 20px;
   display: flex;
@@ -504,10 +633,7 @@ input {
     padding-top: 10px;
   }
 
-  .address {
-    display: flex;
-    flex-direction: column;
-  }
+
 
   .submit {
     margin-bottom: 20px;
@@ -539,5 +665,40 @@ input {
     display: flex;
     justify-content: space-around;
   }
+
+  #button-edit{
+    font-size: 1.4rem;
+    padding: 10px;
+    display: block;
+    margin-top: 15px;
+    background-color: #3CA1E0;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    color: white;
+    width: 40% !important
 }
+}
+
+
+/* Button sign in */
+
+#button-edit{
+    font-size: 1.4rem;
+    padding: 10px;
+    display: block;
+    margin: 15px;
+    background: linear-gradient(10deg,#3CA1E0,#155FB2);
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: 4px;
+    color: white;
+    width: 100%;
+}
+
+#button-edit :hover{
+  color: white !important;
+  background: linear-gradient(10deg,#3CA1E0,#155FB2);
+  cursor:pointer;
+}
+
+
 </style>

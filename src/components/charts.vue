@@ -53,12 +53,14 @@
 }
 .chart-font{
     font-size: 1.6rem;
+    text-align: center;
+    padding-bottom: 5px;
 }
 
 @media (max-width:500px) {
     .chart{
         width: 90%;
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
 }

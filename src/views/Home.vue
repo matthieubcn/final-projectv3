@@ -115,14 +115,22 @@ toogleTask("completed");
     align-items: center;
     flex-direction: column;
   }
+  .toogle-button {
+  margin: 10px !important;
+  
+}
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .newtask-container {
     display: flex;
     align-items: center;
     flex-direction: column;
   }
+}
+
+.input-field-text-container{
+  margin-left: 20px
 }
 
 .task-container-button {

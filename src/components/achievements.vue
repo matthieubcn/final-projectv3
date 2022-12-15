@@ -70,13 +70,18 @@
 .award-title {
     font-size: 1.6rem;
     display:inline-block;
+    color: white;
+    font-weight: 600;
 }
 
 .award-number {
     font-size: 1.5rem;
     text-align: center;
     display: block;
-    padding-top: 20px
+    padding-top: 20px;
+    color: white;
+    font-weight: 800;
+    
 
 }
 

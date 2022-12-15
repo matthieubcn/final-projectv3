@@ -90,7 +90,7 @@ const signIn = async () => {
 
 @media (max-width:800px){
   .big-container{
-    height: 700px !important
+    height: 730px !important
   }
 }
 

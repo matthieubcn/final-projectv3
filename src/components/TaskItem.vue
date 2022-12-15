@@ -141,6 +141,7 @@ const alertSucces = () => {
   display: inline-block;
   width: 100%;
   margin-bottom: 5px;
+  
 }
 
 .task-title-styling-important {
@@ -159,6 +160,11 @@ const alertSucces = () => {
   font-size:2rem;
   margin-bottom: 10px;
 }
+
+.task-title-styling-important{
+  font-size:2rem;
+}
+
 .input-field-text-container{
   margin-top: 20px;
 }
@@ -202,6 +208,10 @@ const alertSucces = () => {
   display: inline-block;
   margin-left: 20px;
   margin-right: 20px;
+  padding-left: 10px;
+  border-radius: 1rem;
+  border: 1px solid rgb(216, 221, 230);
+
 }
 
 .input-field-text-label {
@@ -209,6 +219,7 @@ const alertSucces = () => {
   font-size: 1.5rem;
   display: inline-block;
   margin-left: 20px;
+  margin-top: 10px
 }
 
 .button-task {

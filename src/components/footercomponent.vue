@@ -144,6 +144,9 @@ const submitForm = () => {
 .sub-topic{
     display: flex;
     flex-direction: row;
+    align-items: center;
+
+
 }
 
 li{
