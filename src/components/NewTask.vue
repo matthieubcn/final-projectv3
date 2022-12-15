@@ -115,6 +115,7 @@ const addTask = async () => {
     .container-new-task{
       width: 90% !important;
     }
+
   }
 
 
@@ -144,5 +145,6 @@ const addTask = async () => {
   margin: 20px;
   cursor: pointer;
 }
+
 
 </style>

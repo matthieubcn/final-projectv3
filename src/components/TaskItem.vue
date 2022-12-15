@@ -1,6 +1,7 @@
 <template>
   <div class="whole-task-container">
     <div class="task-container">
+      <div>
       <h3
         :class="
           important ? 'task-title-styling' : 'task-title-styling-important'
@@ -8,6 +9,8 @@
       >
         Title: {{ task.title }}
       </h3>
+    </div>
+    <div>
       <h3
         :class="
           important ? 'task-title-styling' : 'task-title-styling-important'
@@ -16,6 +19,7 @@
         Description: {{ task.description }}
       </h3>
       <!-- <h3 class="task-title-styling"> Created: {{task.inserted_at}}</h3> -->
+    </div>
     </div>
 
     <div class="input-field-text-container" v-show="editTask">
@@ -36,10 +40,16 @@
     </div>
 
     <div class="button-container">
-      <button class="button-task" @click="editStatus">Edit</button>
+      <button class="button-task" @click="editStatus">
+        {{ editTask ? "Discard " : "Edit" }}</button>
       
-      <button class="button-task" @click="deleteTask">Delete</button>
+      <button class="button-task" @click="deleteTask"><i class='fas fa-trash' style='white'></i>
+Delete
+</button>
 
+
+
+    
       <button 
         :class="task.is_complete ? 'button-task-completed' : 'button-task-uncompleted'"
         @click="toogleTask" 
@@ -51,7 +61,10 @@
       <button
         :class="important ? 'button-task' : 'button-task-important'"
         @click="toogleImportant"
+        
       >
+      <img src = 'https://cdn-icons-png.flaticon.com/512/2814/2814255.png' class ='flag-image'>
+      
         Important
       </button>
     </div>
@@ -114,8 +127,6 @@ const toogleImportant = () => {
 const alertSucces = () => {
         alert('Your rock {{username.value}} 1 task is done')
 };
-
-console.log(task.is_complete.value)
 
 
 
@@ -256,6 +267,11 @@ console.log(task.is_complete.value)
   cursor: pointer;
 }
 
+.flag-image{
+  width: 10px;
+  transform: rotate(-10deg)
+}
+
 .title-text {
   color: green;
 }
@@ -273,10 +289,18 @@ console.log(task.is_complete.value)
   cursor: pointer;
 }
 
+
 @media (max-width: 800px) {
   .button-task-save {
-    width: 65% !important;
+    width: 65% !important; 
   }
+  .flag-image{
+   width: 10px !important;
+    transform: rotate(-10deg)
+}
+.button-task-important {
+  width: 100%;
+}
 }
 </style>
 

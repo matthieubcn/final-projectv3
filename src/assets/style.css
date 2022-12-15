@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
+
+
 /* :root {
     --colorWhite: #ffffff;
     --colorBlack: #000000;
@@ -58,7 +60,7 @@ input{
 }
 
 .form-input{
-    margin: 20px
+    margin: 10px
 }
 
 .input-field{
@@ -134,12 +136,12 @@ p {
     font-size: 1.4rem;
     padding: 10px 15px;
     display: block;
-    margin: 20px;
+    margin: 15px;
     background-color: #155FB2;
     border: 1px solid rgb(216, 221, 230);
     border-radius: 4px;
     color: white;
-    width: 87%;
+    width: 95%;
 
 }
 
@@ -167,7 +169,7 @@ p {
     align-items: center;
     align-content: center;
     height: auto;
-    background-color:#F4F6F9 ;
+    background-color:hsl(216, 29%, 97%) ;
     max-height: 900px;
 }
 
@@ -177,6 +179,8 @@ p {
     padding: 20px;
     border: 1px solid rgb(216, 221, 230);
     border-radius: 0.25rem;
+    padding: 50px;
+
 }
 
 /* For mobile user */
@@ -215,7 +219,11 @@ p {
         flex-direction: row;
         align-items: center;
         }
+
+        .new-task-title{
+            font-size: 15px !important
         }
+    }
 /*Extra styling for the sign out page */
 
 .header-subtitle{
@@ -227,7 +235,7 @@ p {
 
 @media (max-width :800px){
 .button-signup{
-    width: 90%;
+    width: 95%;
 }
 }
     
@@ -261,3 +269,8 @@ h3{
     color: #042D60;
 
 }
+
+
+
+/* Footer component */
+

@@ -5,6 +5,10 @@
 
 <div class="big-container">
 
+  <!-- <div class="picture-logo">
+    <img src = '../assets/image/logo.png' class= 'picture-logo-image'>
+  </div> -->
+
   <div>
 
   <div class="container">
@@ -48,6 +52,8 @@
 
 </div>
 
+<!-- <footercomponent id="footercomponent" /> -->
+
 </template>
 
 <script setup>
@@ -56,6 +62,7 @@ import PersonalRouter from "./PersonalRouter.vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import footercomponent from "../components/footercomponent.vue";
+
 
 
 // Route Variables
@@ -86,6 +93,24 @@ const signIn = async () => {
     height: 700px !important
   }
 }
+
+@media (min-width:500px){
+  .picture-logo-image ,.picture-logo{
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 900px;
+  }
+
+  .picture-logo{
+    position: relative;
+    top: 50px;
+    right: 900px;
+
+  }
+}
+
+
 
 
 

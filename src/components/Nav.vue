@@ -4,7 +4,7 @@
    
     <div class = nav-container>
 
-      <p class="username"> Welcome Ironhacker2020</p>
+      <p class="username"> Welcome {{username}}</p>
       <!-- <nav class="navMenu">
    
    
@@ -72,7 +72,22 @@ import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { ref } from 'vue';
 import { supabase } from "../supabase";
+import { onMounted, toRefs } from 'vue'
+  
+// Get the value on the home page 
+const userStore = useUserStore(); 
 
+  const username = ref(null);
+  const email = ref(null);
+
+  onMounted(() => {
+    getProfile();
+  });
+
+  async function getProfile() {
+    await userStore.fetchUser();
+    username.value = userStore.profile.username;
+};
 
 
 
@@ -99,6 +114,7 @@ const signOut = async () => {
 };
 
 
+
 // var sidenav = document.getElementById("mySidenav");
 // var openBtn = document.getElementById("openBtn");
 // var closeBtn = document.getElementById("closeBtn");
@@ -119,8 +135,6 @@ const signOut = async () => {
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-
  
 .nav-container{
   display:flex;
@@ -130,8 +144,10 @@ const signOut = async () => {
 }
 
 .username{
-  font-size: 1.5rem;
-  font-weight: 300;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-left: 5%;
+
 
 }
 
@@ -147,16 +163,11 @@ nav ul {
 
 #router-styling{ 
     text-decoration: none;
-    padding-right: 20px;
+    padding-right: 0px;
     font-size: 1.5rem;
-    text-decoration:none;
-    text-align: center;
     color: #444444;
 }
 
-#router-styling a hover{
-    color: green
-}
 
 #log-out-welcome :hover {
   color: white !important;
@@ -219,7 +230,7 @@ nav ul {
 .menu-button::after {
   display: block;
   background: linear-gradient(10deg,#3CA1E0,#155FB2);
-  position: absolute;
+  position: fixed;
   height: 4px;
   width: 30px;
   transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -298,6 +309,30 @@ nav ul {
 
 }
 
+
+#router-styling{
+  background:
+    linear-gradient(
+      to right,
+      rgba(100, 200, 200, 1),
+      rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(0, 100, 200, 1)
+  );
+  background-size: 100% 3px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+  padding: 10px
+}
+
+#router-styling:hover {
+  background-size: 0 3px, 100% 3px;
+}
 
 
   /* .menu > li:not(:last-child) {

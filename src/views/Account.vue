@@ -1,342 +1,356 @@
 <template>
   <Nav />
-  <h1>Name: {{username}}</h1>
-  <img :src="avatar_url ? avatar_url : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'" alt="Profile picture" class="avatar-picture">
-<!-- 
-  <form @submit.prevent="signIn" class="form-sign-in">
-        <div class="form-input-account-firstName">
-          <label class="input-field-label-account">FirstName</label>
+  <div class="account-wrapper">
+    <div class="left-account-page-wrapper">
+      <div class="account-image">
+        <!-- <img :src="avatar_url ? avatar_url : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'" alt="Profile picture" class="avatar-picture"> -->
+        <form class="form-widget" @submit.prevent="updateProfile">
+          <Avatar v-model:path="avatar_url" @upload="updateProfile" size="20" />
+        </form>
+
+        <div class="contact-info">
+          <h1 class="account-title">Account Information</h1>
+          <h1 class="account-name">Name :{{ username }}</h1>
+          <h1 class="account-email">Email : {{ email }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-account-page-wrapper">
+      <form @submit.prevent="submitForm" class="form-account">
+        <div id="user-input-formName-data">
+          <label class="account-label" for="firstname">First Name</label>
           <input
+            class="input-field"
             type="text"
-            class="input-field-account"
-            placeholder="eg Steve - Elon - Amoncio"
-            id="firstName"
-            v-model="firstName"
-            required
+            autocomplete="off"
+            id="firstname"
+            v-model.trim.lazy="formAccount.formName"
           />
-          </div>
-
-          <div class="form-input-account-LastName">
-          <label class="input-field-label-account">LastName</label>
+        </div>
+        <div id="user-input-surname-data">
+          <label class="account-label" for="surname">Surname </label>
           <input
+            class="input-field"
+            name="surname"
+            id="surname"
             type="text"
-            class="input-field-account"
-            placeholder="eg... Jordan - Curry - Lebron the Goat..."
-            id="LastName"
-            v-model="LastName"
-            required
+            v-model.trim.lazy="formAccount.formFamilyName"
           />
-          </div>
+        </div>
 
-          <div class="form-input-account-Username">
-          <label class="input-field-label-account">UserName</label>
+        <div id="user-input-profileAge-data">
+          <label class="account-label" for="profileAge"> Age </label>
           <input
-            type="text"
-            class="input-field-account"
-            placeholder="Ironhacker2020 - JavaScriptlover - FifaLovers"
-            id="UserName "
-            v-model="Username "
-            required
+            class="input-field"
+            type="number"
+            id="profileAge"
+            v-model.number="formAccount.formProfileAge"
           />
+        </div>
+
+        <div class="address">
+          <div id="user-input-adress-data">
+            <label class="account-label" for="adress">Adress </label>
+            <input
+              class="input-field"
+              name="adress"
+              id="adress"
+              type="text"
+              v-model.trim.lazy="formAccount.formAdress"
+            />
           </div>
+          <div>
+            <div id="user-input-zipcode-data">
+              <label class="account-label" for="Zipcode"> ZipCode </label>
+              <input
+                class="input-field"
+                type="number"
+                id="Zipcode"
+                v-model.number="formAccount.formZipcode"
+              />
+            </div>
+          </div>
+        </div>
 
-           <div class="form-input-account-Country">
-           <label class="input-field-label-account">Country</label>
-           <select  name="country">
-           <option value="">Country...</option>
-            <option value="AF">Afghanistan</option>
-            <option value="AL">Albania</option>
-            <option value="DZ">Algeria</option>
-            <option value="AS">American Samoa</option>
-            <option value="AD">Andorra</option>
-            <option value="AG">Angola</option>
-            <option value="AI">Anguilla</option>
-            <option value="AG">Antigua &amp; Barbuda</option>
-            <option value="AR">Argentina</option>
-            <option value="AA">Armenia</option>
-            <option value="AW">Aruba</option>
-            <option value="AU">Australia</option>
-            <option value="AT">Austria</option>
-            <option value="AZ">Azerbaijan</option>
-            <option value="BS">Bahamas</option>
-            <option value="BH">Bahrain</option>
-            <option value="BD">Bangladesh</option>
-            <option value="BB">Barbados</option>
-            <option value="BY">Belarus</option>
-            <option value="BE">Belgium</option>
-            <option value="BZ">Belize</option>
-            <option value="BJ">Benin</option>
-            <option value="BM">Bermuda</option>
-            <option value="BT">Bhutan</option>
-            <option value="BO">Bolivia</option>
-            <option value="BL">Bonaire</option>
-            <option value="BA">Bosnia &amp; Herzegovina</option>
-            <option value="BW">Botswana</option>
-            <option value="BR">Brazil</option>
-            <option value="BC">British Indian Ocean Ter</option>
-            <option value="BN">Brunei</option>
-            <option value="BG">Bulgaria</option>
-            <option value="BF">Burkina Faso</option>
-            <option value="BI">Burundi</option>
-            <option value="KH">Cambodia</option>
-            <option value="CM">Cameroon</option>
-            <option value="CA">Canada</option>
-            <option value="IC">Canary Islands</option>
-            <option value="CV">Cape Verde</option>
-            <option value="KY">Cayman Islands</option>
-            <option value="CF">Central African Republic</option>
-            <option value="TD">Chad</option>
-            <option value="CD">Channel Islands</option>
-            <option value="CL">Chile</option>
-            <option value="CN">China</option>
-            <option value="CI">Christmas Island</option>
-            <option value="CS">Cocos Island</option>
-            <option value="CO">Colombia</option>
-            <option value="CC">Comoros</option>
-            <option value="CG">Congo</option>
-            <option value="CK">Cook Islands</option>
-            <option value="CR">Costa Rica</option>
-            <option value="CT">Cote D'Ivoire</option>
-            <option value="HR">Croatia</option>
-            <option value="CU">Cuba</option>
-            <option value="CB">Curacao</option>
-            <option value="CY">Cyprus</option>
-            <option value="CZ">Czech Republic</option>
-            <option value="DK">Denmark</option>
-            <option value="DJ">Djibouti</option>
-            <option value="DM">Dominica</option>
-            <option value="DO">Dominican Republic</option>
-            <option value="TM">East Timor</option>
-            <option value="EC">Ecuador</option>
-            <option value="EG">Egypt</option>
-            <option value="SV">El Salvador</option>
-            <option value="GQ">Equatorial Guinea</option>
-            <option value="ER">Eritrea</option>
-            <option value="EE">Estonia</option>
-            <option value="ET">Ethiopia</option>
-            <option value="FA">Falkland Islands</option>
-            <option value="FO">Faroe Islands</option>
-            <option value="FJ">Fiji</option>
-            <option value="FI">Finland</option>
-            <option value="FR">France</option>
-            <option value="GF">French Guiana</option>
-            <option value="PF">French Polynesia</option>
-            <option value="FS">French Southern Ter</option>
-            <option value="GA">Gabon</option>
-            <option value="GM">Gambia</option>
-            <option value="GE">Georgia</option>
-            <option value="DE">Germany</option>
-            <option value="GH">Ghana</option>
-            <option value="GI">Gibraltar</option>
-            <option value="GB">Great Britain</option>
-            <option value="GR">Greece</option>
-            <option value="GL">Greenland</option>
-            <option value="GD">Grenada</option>
-            <option value="GP">Guadeloupe</option>
-            <option value="GU">Guam</option>
-            <option value="GT">Guatemala</option>
-            <option value="GN">Guinea</option>
-            <option value="GY">Guyana</option>
-            <option value="HT">Haiti</option>
-            <option value="HW">Hawaii</option>
-            <option value="HN">Honduras</option>
-            <option value="HK">Hong Kong</option>
-            <option value="HU">Hungary</option>
-            <option value="IS">Iceland</option>
-            <option value="IN">India</option>
-            <option value="ID">Indonesia</option>
-            <option value="IA">Iran</option>
-            <option value="IQ">Iraq</option>
-            <option value="IR">Ireland</option>
-            <option value="IM">Isle of Man</option>
-            <option value="IL">Israel</option>
-            <option value="IT">Italy</option>
-            <option value="JM">Jamaica</option>
-            <option value="JP">Japan</option>
-            <option value="JO">Jordan</option>
-            <option value="KZ">Kazakhstan</option>
-            <option value="KE">Kenya</option>
-            <option value="KI">Kiribati</option>
-            <option value="NK">Korea North</option>
-            <option value="KS">Korea South</option>
-            <option value="KW">Kuwait</option>
-            <option value="KG">Kyrgyzstan</option>
-            <option value="LA">Laos</option>
-            <option value="LV">Latvia</option>
-            <option value="LB">Lebanon</option>
-            <option value="LS">Lesotho</option>
-            <option value="LR">Liberia</option>
-            <option value="LY">Libya</option>
-            <option value="LI">Liechtenstein</option>
-            <option value="LT">Lithuania</option>
-            <option value="LU">Luxembourg</option>
-            <option value="MO">Macau</option>
-            <option value="MK">Macedonia</option>
-            <option value="MG">Madagascar</option>
-            <option value="MY">Malaysia</option>
-            <option value="MW">Malawi</option>
-            <option value="MV">Maldives</option>
-            <option value="ML">Mali</option>
-            <option value="MT">Malta</option>
-            <option value="MH">Marshall Islands</option>
-            <option value="MQ">Martinique</option>
-            <option value="MR">Mauritania</option>
-            <option value="MU">Mauritius</option>
-            <option value="ME">Mayotte</option>
-            <option value="MX">Mexico</option>
-            <option value="MI">Midway Islands</option>
-            <option value="MD">Moldova</option>
-            <option value="MC">Monaco</option>
-            <option value="MN">Mongolia</option>
-            <option value="MS">Montserrat</option>
-            <option value="MA">Morocco</option>
-            <option value="MZ">Mozambique</option>
-            <option value="MM">Myanmar</option>
-            <option value="NA">Nambia</option>
-            <option value="NU">Nauru</option>
-            <option value="NP">Nepal</option>
-            <option value="AN">Netherland Antilles</option>
-            <option value="NL">Netherlands (Holland, Europe)</option>
-            <option value="NV">Nevis</option>
-            <option value="NC">New Caledonia</option>
-            <option value="NZ">New Zealand</option>
-            <option value="NI">Nicaragua</option>
-            <option value="NE">Niger</option>
-            <option value="NG">Nigeria</option>
-            <option value="NW">Niue</option>
-            <option value="NF">Norfolk Island</option>
-            <option value="NO">Norway</option>
-            <option value="OM">Oman</option>
-            <option value="PK">Pakistan</option>
-            <option value="PW">Palau Island</option>
-            <option value="PS">Palestine</option>
-            <option value="PA">Panama</option>
-            <option value="PG">Papua New Guinea</option>
-            <option value="PY">Paraguay</option>
-            <option value="PE">Peru</option>
-            <option value="PH">Philippines</option>
-            <option value="PO">Pitcairn Island</option>
-            <option value="PL">Poland</option>
-            <option value="PT">Portugal</option>
-            <option value="PR">Puerto Rico</option>
-            <option value="QA">Qatar</option>
-            <option value="ME">Republic of Montenegro</option>
-            <option value="RS">Republic of Serbia</option>
-            <option value="RE">Reunion</option>
-            <option value="RO">Romania</option>
-            <option value="RU">Russia</option>
-            <option value="RW">Rwanda</option>
-            <option value="NT">St Barthelemy</option>
-            <option value="EU">St Eustatius</option>
-            <option value="HE">St Helena</option>
-            <option value="KN">St Kitts-Nevis</option>
-            <option value="LC">St Lucia</option>
-            <option value="MB">St Maarten</option>
-            <option value="PM">St Pierre &amp; Miquelon</option>
-            <option value="VC">St Vincent &amp; Grenadines</option>
-            <option value="SP">Saipan</option>
-            <option value="SO">Samoa</option>
-            <option value="AS">Samoa American</option>
-            <option value="SM">San Marino</option>
-            <option value="ST">Sao Tome &amp; Principe</option>
-            <option value="SA">Saudi Arabia</option>
-            <option value="SN">Senegal</option>
-            <option value="RS">Serbia</option>
-            <option value="SC">Seychelles</option>
-            <option value="SL">Sierra Leone</option>
-            <option value="SG">Singapore</option>
-            <option value="SK">Slovakia</option>
-            <option value="SI">Slovenia</option>
-            <option value="SB">Solomon Islands</option>
-            <option value="OI">Somalia</option>
-            <option value="ZA">South Africa</option>
-            <option value="ES">Spain</option>
-            <option value="LK">Sri Lanka</option>
-            <option value="SD">Sudan</option>
-            <option value="SR">Suriname</option>
-            <option value="SZ">Swaziland</option>
-            <option value="SE">Sweden</option>
-            <option value="CH">Switzerland</option>
-            <option value="SY">Syria</option>
-            <option value="TA">Tahiti</option>
-            <option value="TW">Taiwan</option>
-            <option value="TJ">Tajikistan</option>
-            <option value="TZ">Tanzania</option>
-            <option value="TH">Thailand</option>
-            <option value="TG">Togo</option>
-            <option value="TK">Tokelau</option>
-            <option value="TO">Tonga</option>
-            <option value="TT">Trinidad &amp; Tobago</option>
-            <option value="TN">Tunisia</option>
-            <option value="TR">Turkey</option>
-            <option value="TU">Turkmenistan</option>
-            <option value="TC">Turks &amp; Caicos Is</option>
-            <option value="TV">Tuvalu</option>
-            <option value="UG">Uganda</option>
-            <option value="UA">Ukraine</option>
-            <option value="AE">United Arab Emirates</option>
-            <option value="GB">United Kingdom</option>
-            <option value="US">United States of America</option>
-            <option value="UY">Uruguay</option>
-            <option value="UZ">Uzbekistan</option>
-            <option value="VU">Vanuatu</option>
-            <option value="VS">Vatican City State</option>
-            <option value="VE">Venezuela</option>
-            <option value="VN">Vietnam</option>
-            <option value="VB">Virgin Islands (Brit)</option>
-            <option value="VA">Virgin Islands (USA)</option>
-            <option value="WK">Wake Island</option>
-            <option value="WF">Wallis &amp; Futana Is</option>
-            <option value="YE">Yemen</option>
-            <option value="ZR">Zaire</option>
-            <option value="ZM">Zambia</option>
-            <option value="ZW">Zimbabwe</option>
-          </select>
+        <div id="user-input-Location-data">
+          <div>
+            <label class="account-label" for="location"> Continent </label>
+          </div>
+          <div>
+            <select
+              class="input-field"
+              name="location"
+              id="location"
+              v-model="formAccount.formLocation"
+            >
+              <option value="">Select your continent</option>
 
-        </div> -->
+              <option value="North-America">North America</option>
+              <option value="Europe">Europe</option>
+              <option value="Asia">Asia</option>
+              <option value="Africa">Africa</option>
+            </select>
+          </div>
+        </div>
 
+        <input class="submit" type="submit" value="Send" />
+      </form>
+    </div>
+  </div>
 
+  <div class="footer">
+    <footercomponent id="footercomponent" />
+  </div>
 </template>
 
 <script setup>
-  import { supabase } from '../supabase'
-  import { onMounted, ref, toRefs } from 'vue'
-  import { useUserStore } from "../stores/user";
-  import Nav from '../components/Nav.vue';
+import { supabase } from "../supabase";
+import { onMounted, ref, toRefs, reactive } from "vue";
+import { useUserStore } from "../stores/user";
+import Nav from "../components/Nav.vue";
+import Avatar from "../components/avatar.vue";
+import footercomponent from "../components/footercomponent.vue";
+import { useProfileStore } from "../stores/profile";
 
-  const userStore = useUserStore();
+const userStore = useUserStore();
 
-  const loading = ref(false);
-  const username = ref(null);
-  const website = ref(null);
-  const avatar_url = ref(null);
+const loading = ref(false);
+const username = ref(null);
+const website = ref(null);
+const avatar_url = ref(null);
+const email = ref(null);
 
-  onMounted(() => {
-    getProfile();
-  });
+onMounted(() => {
+  getProfile();
+});
 
-  async function getProfile() {
-    await userStore.fetchUser();
-    username.value = userStore.profile.username;
-    avatar_url.value = userStore.profile.avatar_url;
+async function getProfile() {
+  await userStore.fetchUser();
+  username.value = userStore.profile.username;
+  avatar_url.value = userStore.profile.avatar_url;
+  email.value = userStore.profile.email;
+}
+
+async function signOut() {
+  try {
+    loading.value = true;
+    let { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  } catch (error) {
+    alert(error.message);
+  } finally {
+    loading.value = false;
   }
+}
 
-  async function signOut() {
-    try {
-      loading.value = true
-      let { error } = await supabase.auth.signOut()
-      if (error) throw error
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      loading.value = false
-    }
-  }
+const useProfile = useProfileStore()
+
+const formAccount = reactive({
+  formName: "",
+  formFamilyName: "",
+  formAdress: "",
+  formZipcode: null,
+  formProfileAge: null,
+  formLocation: [],
+});
+console.log(useProfileStore().fetchProfile());
+
+
+
+const submitForm = () => {
+  console.log("Form Account", formAccount);
+};
 </script>
 
 <style>
-.avatar-picture{
-  width: 200px;
+.avatar-picture {
+  width: 100px;
   border-radius: 25%;
+}
+
+.account-name,
+.account-email {
+  font-size: 1.5rem;
+}
+
+.account-name {
+  margin-top: 20px;
+}
+
+.left-account-page-wrapper > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2%;
+  height: 400px;
+}
+
+.left-account-page-wrapper {
+  margin-top: 2%;
+}
+
+@media (max-width: 500px) {
+  .left-account-page-wrapper {
+    margin-top: 10% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .account-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-account {
+    width: 90%;
+  }
+  .left-account-page-wrapper > div {
+    display: flex;
+  }
+}
+
+@media (max-width: 800px) {
+  .left-account-page-wrapper {
+    margin-top: 22% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .account-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-account {
+    width: 90%;
+  }
+  .left-account-page-wrapper > div {
+    display: flex;
+  }
+}
+
+.contact-info {
+  margin-top: 20px;
+}
+
+.right-account-page-wrapper > div {
+  display: flex;
+}
+
+.account-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Footer style */
+
+.footer > div {
+  display: flex;
+  flex-direction: row;
+}
+.footer > .picture-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#footercomponent {
+  position: relative !important;
+  width: 100%;
+  bottom: 0px;
+  height: 200px;
+  background-color: whitesmoke;
+}
+
+
+
+@media (max-width: 800px) {
+  #footercomponent {
+    height: 300px !important;
+    background-color: #f4f6f9;
+    margin-top: 20px;
+  }
+
+  .footer > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .footer-text {
+    padding-inline: 0px;
+    margin-top: 5px;
+  }
+  .contact {
+    display: none;
+  }
+}
+
+.user-input-Location-data {
+  display: flex;
+}
+
+.right-account-page-wrapper {
+  margin-top: 2%;
+}
+
+/* CSS form */
+.account-label {
+  font-size: 1.5em;
+  color: green;
+}
+
+.submit :hover {
+  color: white !important;
+  background: linear-gradient(10deg, #3ca1e0, #155fb2);
+  cursor: pointer;
+}
+
+.submit {
+  font-size: 1.1rem;
+  padding: 10px 10px;
+  display: block;
+  margin: 10px;
+  background-color: purple;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  color: white;
+  width: 100%;
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.form-input {
+  margin: 20px;
+}
+
+.input-field {
+  font-size: 1.4rem;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px;
+}
+.input-field-label {
+  color: rgb(84, 105, 141);
+  font-size: 1.4rem;
+  margin: 10px;
+}
+
+.input-field-zip {
+  font-size: 1.4rem;
+  border: 1px solid rgb(216, 221, 230);
+  border-radius: 4px;
+}
+.address {
+  display: flex;
 }
 </style>
